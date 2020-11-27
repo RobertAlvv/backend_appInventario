@@ -35,6 +35,7 @@ func SaveUser(c *fiber.Ctx) error {
 	}
 
 	user.Save()
+	user.TokenJWT = middleware.SignToken("tokenKey", string(user.Id))
 	return models.SendSuccess(c, user)
 }
 
